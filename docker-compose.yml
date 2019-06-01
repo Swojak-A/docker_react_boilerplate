@@ -10,4 +10,11 @@ services:
     environment:
       - NODE_ENV=development
     command: pm2 serve build --no-daemon
-
+  
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    links:
+      - app:app
