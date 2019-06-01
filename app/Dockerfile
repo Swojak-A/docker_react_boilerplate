@@ -2,9 +2,13 @@ FROM node:10-alpine
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json /usr/src/app/package.json
+COPY package-lock.json /usr/src/app/package-lock.json
+
 RUN npm install
+RUN npm install -g serve
+RUN npm install -g pm2
 
-COPY . .
+COPY . /usr/src/app
 
-CMD [ "npm", "start" ]
+RUN npm run build
